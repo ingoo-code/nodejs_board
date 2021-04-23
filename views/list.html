@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./index.css" rel="stylesheet"> 
+    <title>Document</title>
+</head>
+<body>
+    
+    
+    <h2>게시판 리스트입니다.</h2>
+    <div class="board">
+        <table>
+            <tr>
+                <td>번호</td>
+                <td>제목</td>
+                <td>작성자</td>
+                <td>날짜</td>
+                <td>조회수</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td><a href="/view">공지사항입니다.</a></td>
+                <td>관리자</td>
+                <td>2021-04-23</td>
+                <td>3</td>
+            </tr>
+            {% for item in list %}
+                <tr>
+                    <td>{{item.idx}}</td>
+                    <td><a href="/view?idx={{item.idx}}">{{item.subject}}</a></td>
+                    <td>{{item.board_name}}</td>
+                    <td>{{item.today}}</td>
+                    <td>{{item.hit}}</td>
+                </tr>
+            {% endfor %}
+        </table>
+        <a href='/write' class="write_btn">글쓰기</a>
+    </div>
+</body>
+</html>
