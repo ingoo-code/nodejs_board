@@ -3,14 +3,34 @@ const nunjucks = require('nunjucks');
 const mysql = require('mysql');
 const bodyParser = require('body-parser');
 const app = express();
-                                   //                CSS,JS,IMAGE,동영상
+const indexRouter = require('./routes');
+                                   
 app.use(express.static('public')); // 익스프레스야 나   정적파일들은 (public) 안에있는 내용으로 만들꺼야ㅣ.
 app.use(bodyParser.urlencoded({ extended:false, }));
-
-app.set('view engine','html');
-nunjucks.configure('views',{
-    express:app,
+app.set('view engine', 'html');
+nunjucks.configure('views', {
+  express: app,
 });
+
+app.use('/',indexRouter);
+app.use((req,res)=>{
+    console.log('next?');
+    res.status(404).render("error.html");
+});
+
+
+/*
+app.use((req,res,next)=>{
+    console.log('모든 요청 다 실행됩니다.');
+    next();
+});
+
+app.get('/', (req,res,next)=>{
+    console.log('GET / 요청에서만 실행됩니다.');
+    next();
+})
+*/
+
 
 let connection = mysql.createConnection({
     host:'localhost',
@@ -19,10 +39,6 @@ let connection = mysql.createConnection({
     database:'homepage',
 });
 connection.connect();
-
-app.get('/',(req,res)=>{
-    res.render('index.html');
-});
 
 app.get('/list',(req,res)=>{
     connection.query("SELECT idx,subject,board_name,content,hit,date_format(today,'%Y-%m-%d') as today FROM board",(error,results)=>{

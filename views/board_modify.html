@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./index.css" rel="stylesheet">
-    <title>Document</title>
-</head>
-<body>
+{% include "./layout/top.html" %}
     <form action="/modify" method="post">
         <input type="hidden" name="idx" value="{{list.idx}}">
         <h2>게시판 글수정 페이지 입니다.</h2>
@@ -27,5 +18,4 @@
         <input type="submit" value="글수정" class="write_btn">
         <a href="/list">글목록</a>
     </form>
-</body>
-</html>
+{% include "./layout/bottom.html" %}

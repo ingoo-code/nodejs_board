@@ -1,15 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="./index.css" rel="stylesheet"> 
-    <title>Document</title>
-</head>
-<body>
-    
-    
+{% include "./layout/bottom.html" %}
     <h2>게시판 리스트입니다.</h2>
     <div class="board">
         <table>
@@ -23,14 +12,13 @@
             {% for item in list %}
                 <tr>
                     <td>{{item.idx}}</td>
-                    <td><a href="/view?idx={{item.idx}}">{{item.subject}}</a></td>
+                    <td><a href="/board/view?idx={{item.idx}}">{{item.subject}}</a></td>
                     <td>{{item.board_name}}</td>
                     <td>{{item.today}}</td>
                     <td>{{item.hit}}</td>
                 </tr>
             {% endfor %}
         </table>
-        <a href='/write' class="write_btn">글쓰기</a>
+        <a href='/board/write' class="write_btn">글쓰기</a>
     </div>
-</body>
-</html>
+{% include "./layout/bottom.html" %}
