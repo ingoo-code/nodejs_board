@@ -9,18 +9,19 @@
 </head>
 <body>
     <form action="/modify" method="post">
+        <input type="hidden" name="idx" value="{{list.idx}}">
         <h2>게시판 글수정 페이지 입니다.</h2>
         <ul>
             <li>글제목</li>
-            <li><input type="text" name="board_subject"></li>
+            <li><input type="text" name="board_subject" value="{{list.subject}}"></li>
         </ul>
         <ul>
             <li>작성자</li>
-            <li><input type="text" name="board_name"></li>
+            <li><input type="text" name="board_name" value="{{list.board_name}}"></li>
         </ul>
         <ul>
             <li>
-                <textarea name="board_content"></textarea>
+                <textarea name="board_content">{{list.content}}</textarea>
             </li>
         </ul>
         <input type="submit" value="글수정" class="write_btn">
