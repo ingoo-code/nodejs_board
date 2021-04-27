@@ -1,4 +1,6 @@
-const mysql = require('mysql')
+const mysql = require('mysql');
+const getConnection = require('../../config/db');
+
 const connection = mysql.createConnection({
 	host:'localhost',
     user:'root',
@@ -8,15 +10,18 @@ const connection = mysql.createConnection({
 
 
 let list = (req, res, next) =>{
-    connection.query("SELECT idx,subject,board_name,content,hit,date_format(today,'%Y-%m-%d') as today FROM board",(error,results)=>{
-        if(error) {
-            console.log(error);
-        } else {
-            res.render('list.html',{
-                list:results,
-            });
-        }
-    });
+    getConnection( (conn) => {
+        conn.query("select * from board",(e,result)=>{
+            if(e){
+                console.log('error: ',e);
+            } else {
+                res.render('list.html',{
+                    list:result
+                });
+            }
+        });
+        conn.release();
+    })
 }
 
 let view = (req,res,next)=>{

@@ -1,6 +1,31 @@
-/* express만 사용해서 3000 / hello world */
-const express = require('express'); // express 만든사람이 이렇게하래요.
+//npm install sequelize
+//npm install mysql
+const express = require('express'); 
 const app = express();
+
+//Db Connection
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize('homepage','root','root',{
+    host:'localhost',
+    dialect:'mysql',
+    pool:{
+        max: 5,
+        min: 0,
+        acquire: 30000,
+        idle: 10000,
+    }
+});
+
+//Test 구문
+sequelize
+    .authenticate()
+    .then(()=>{
+        console.log('Connection has been established successfully.');
+    })
+    .catch(err =>{
+        console.log("Unable to connect to the databases:",err);
+    });
+
 
 app.get('/',(req,res)=>{
     res.send('Hello world!');
